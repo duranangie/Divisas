@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.divisas.main.Class.Cliente;
+import com.divisas.main.Repository.ClienteRepository;
 import com.divisas.main.Service.ClienteService;
 
 import java.util.List;
@@ -11,13 +12,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
-
+    
     private final ClienteService clienteService;
+    private final ClienteRepository clienteRepository;
 
     @Autowired
-    public ClienteController(ClienteService clienteService) {
+    public ClienteController(ClienteService clienteService,ClienteRepository clienteRepository) {
         this.clienteService = clienteService;
+        this.clienteRepository = clienteRepository;
     }
+
+
+    @GetMapping("/por-pais/{nombrePais}")
+    public List<Cliente> obtenerClientesPorNombrePais(@PathVariable String nombrePais) {
+        return clienteService.obtenerClientesPorNombrePais(nombrePais);
+    }
+
+
+    @GetMapping("/nombreContiene/{keyword}")
+public List<Cliente> obtenerClientesPorNombreContiene(@PathVariable String keyword) {
+    return clienteRepository.findByNombreContaining(keyword);
+}
+
+
 
     @PostMapping("/guardar")
     public Cliente guardarCliente(@RequestBody Cliente cliente) {
@@ -54,6 +71,10 @@ public Cliente actualizarCliente(@PathVariable Long id, @RequestBody Cliente cli
     
         throw new RuntimeException("No se encontró ningún cliente con el ID: " + id);
     }
+
+
+
+    
 }
 }
 

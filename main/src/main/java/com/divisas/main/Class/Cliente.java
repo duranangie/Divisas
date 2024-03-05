@@ -19,7 +19,7 @@ public class Cliente {
     private String correo;
     private String telefono;
     
-@JsonIgnore
+
 @OneToOne(fetch = FetchType.EAGER)
 @JoinColumn(name = "pais_id")
 private Pais pais;
@@ -144,11 +144,7 @@ private Pais pais;
 
 
 
-  
-
-
-
-    public List<Monedas> getMonedas() {
+     public List<Monedas> getMonedas() {
         return monedas;
     }
 

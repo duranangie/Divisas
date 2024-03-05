@@ -58,4 +58,8 @@ public class ClienteService  {
         return clienteRepository.save(cliente);
     }
 
+    public List<Cliente> obtenerClientesPorNombrePais(String nombrePais) {
+        return clienteRepository.findByNombrePais(nombrePais);
+    }
+
 }
