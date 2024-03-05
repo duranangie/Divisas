@@ -1,7 +1,9 @@
-package com.divisas.main.Clases;
+package com.divisas.main.Class;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
@@ -17,9 +19,11 @@ public class Cliente {
     private String correo;
     private String telefono;
     
-    @JoinColumn(name = "pais_id")
-    @OneToOne(fetch = FetchType.EAGER)
-    private Pais pais;
+@JsonIgnore
+@OneToOne(fetch = FetchType.EAGER)
+@JoinColumn(name = "pais_id")
+private Pais pais;
+
     
 
 
@@ -140,17 +144,7 @@ public class Cliente {
 
 
 
-    public List<Transaccion> getTransacciones() {
-        return transacciones;
-    }
-
-
-
-
-    public void setTransacciones(List<Transaccion> transacciones) {
-        this.transacciones = transacciones;
-    }
-
+  
 
 
 
@@ -160,10 +154,6 @@ public class Cliente {
 
 
 
-
-    public void setMonedas(List<Monedas> monedas) {
-        this.monedas = monedas;
-    }
 
 
 

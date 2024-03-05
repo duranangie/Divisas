@@ -1,3 +1,0 @@
-# DIVISA 
-
-proyecto spring boot 

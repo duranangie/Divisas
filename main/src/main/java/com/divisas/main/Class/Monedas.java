@@ -1,10 +1,10 @@
-package com.divisas.main.Clases;
+package com.divisas.main.Class;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 @Entity
 public class Monedas {
     @Id
@@ -14,23 +14,29 @@ public class Monedas {
     private String codigo_ISO;
     private String simbolo;
 
-    @OneToMany(mappedBy = "monedas",cascade= CascadeType.ALL, orphanRemoval = true , fetch = FetchType.LAZY)
-    private List<Transaccion> transacciones = new ArrayList<>();
+  
+    @OneToMany(mappedBy = "monedasBase", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Transaccion> transaccionesBase = new ArrayList<>();
+
+    @OneToMany(mappedBy = "monedasDestino", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Transaccion> transaccionesDestino = new ArrayList<>();
 
 
-    @ManyToMany(mappedBy = "monedas")
+    @ManyToMany(mappedBy = "monedas", fetch = FetchType.EAGER)
     private List<Cliente> cliente;
 
 
    
 
-    public Monedas(Long id, String nombre, String codigo_ISO, String simbolo, List<Transaccion> transacciones,
-            List<Cliente> cliente) {
+ 
+    public Monedas(Long id, String nombre, String codigo_ISO, String simbolo, List<Transaccion> transaccionesBase,
+            List<Transaccion> transaccionesDestino, List<Cliente> cliente) {
         this.id = id;
         this.nombre = nombre;
         this.codigo_ISO = codigo_ISO;
         this.simbolo = simbolo;
-        this.transacciones = transacciones;
+        this.transaccionesBase = transaccionesBase;
+        this.transaccionesDestino = transaccionesDestino;
         this.cliente = cliente;
     }
 
@@ -70,27 +76,14 @@ public class Monedas {
         this.simbolo = simbolo;
     }
 
-    public List<Transaccion> getTransacciones() {
-        return transacciones;
-    }
 
-    public void setTransacciones(List<Transaccion> transacciones) {
-        this.transacciones = transacciones;
-    }
 
-    public List<Cliente> getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(List<Cliente> cliente) {
-        this.cliente = cliente;
-    }
-
-    @Override
     public String toString() {
-        return "Monedas [id=" + id + ", nombre=" + nombre + ", codigo_ISO=" + codigo_ISO + ", simbolo=" + simbolo
-                + ", transacciones=" + transacciones + ", cliente=" + cliente + "]";
+        return "Monedas [id=" + id + ", codigoISO=" + codigo_ISO + ", nombre=" + nombre + ", simbolo=" + simbolo + "]";
     }
+    
+
+ 
 
     
 }

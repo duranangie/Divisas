@@ -1,4 +1,4 @@
-package com.divisas.main.Clases;
+package com.divisas.main.Class;
 
 import jakarta.persistence.*;
 
@@ -39,13 +39,7 @@ public class Pais {
         this.codigo_ISO = codigo_ISO;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
+  
  
     @Override
     public String toString() {

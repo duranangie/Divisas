@@ -1,4 +1,4 @@
-package com.divisas.main.Clases;
+package com.divisas.main.Class;
 import java.sql.Time;
 import java.util.Date;
 

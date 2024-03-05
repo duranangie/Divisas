@@ -1,4 +1,4 @@
-package com.divisas.main.Clases;
+package com.divisas.main.Class;
 
 
 import java.sql.Time;
@@ -13,33 +13,36 @@ import jakarta.persistence.*;
 public class Transaccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
     private double cantidadBase;
     private double cantidadDestino;
     private double tasaCambioUtilizado;
-       @Temporal(TemporalType.DATE)
+
+    @Temporal(TemporalType.DATE)
     private Date fecha;
+
     @Temporal(TemporalType.TIME)
     private Time hora;
-    
+
     @ManyToOne
     @JoinColumn(name="id_cliente")
     private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name="id_monedaBase")
-    private Monedas monedas;
+    private Monedas monedasBase;
 
     @ManyToOne
     @JoinColumn(name="id_monedaDestino")
-    private Monedas moneda;
+    private Monedas monedasDestino;
 
-    @OneToMany(mappedBy = "transaccion", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "transaccion", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<HistorialTransaccion> historialTransaccion = new ArrayList<>();
-   
-    public Transaccion(Long id, double cantidadBase, double cantidadDestino, double tasaCambioUtilizado,
-             Date fecha, Time hora, Cliente cliente, Monedas monedas, Monedas moneda,
+
+
+
+    public Transaccion(Long id, double cantidadBase, double cantidadDestino, double tasaCambioUtilizado, Date fecha,
+            Time hora, Cliente cliente, Monedas monedasBase, Monedas monedasDestino,
             List<HistorialTransaccion> historialTransaccion) {
         this.id = id;
         this.cantidadBase = cantidadBase;
@@ -48,8 +51,8 @@ public class Transaccion {
         this.fecha = fecha;
         this.hora = hora;
         this.cliente = cliente;
-        this.monedas = monedas;
-        this.moneda = moneda;
+        this.monedasBase = monedasBase;
+        this.monedasDestino = monedasDestino;
         this.historialTransaccion = historialTransaccion;
     }
 
@@ -112,38 +115,32 @@ public class Transaccion {
         this.cliente = cliente;
     }
 
-    public Monedas getMonedas() {
-        return monedas;
+
+
+    public Monedas getMonedasBase() {
+        return monedasBase;
     }
 
-    public void setMonedas(Monedas monedas) {
-        this.monedas = monedas;
+    public void setMonedasBase(Monedas monedasBase) {
+        this.monedasBase = monedasBase;
     }
 
-    public Monedas getMoneda() {
-        return moneda;
+    public Monedas getMonedasDestino() {
+        return monedasDestino;
     }
 
-    public void setMoneda(Monedas moneda) {
-        this.moneda = moneda;
-    }
-
-    public List<HistorialTransaccion> getHistorialTransaccion() {
-        return historialTransaccion;
-    }
-
-    public void setHistorialTransaccion(List<HistorialTransaccion> historialTransaccion) {
-        this.historialTransaccion = historialTransaccion;
+    public void setMonedasDestino(Monedas monedasDestino) {
+        this.monedasDestino = monedasDestino;
     }
 
     @Override
     public String toString() {
         return "Transaccion [id=" + id + ", cantidadBase=" + cantidadBase + ", cantidadDestino=" + cantidadDestino
                 + ", tasaCambioUtilizado=" + tasaCambioUtilizado + ", fecha=" + fecha + ", hora=" + hora + ", cliente="
-                + cliente + ", monedas=" + monedas + ", moneda=" + moneda + ", historialTransaccion="
-                + historialTransaccion + "]";
+                + cliente + ", monedasBase=" + monedasBase + ", monedasDestino=" + monedasDestino + "]";
     }
-
+    
+ 
     
 
 

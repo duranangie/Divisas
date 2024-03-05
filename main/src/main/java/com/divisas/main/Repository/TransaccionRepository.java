@@ -1,7 +1,7 @@
 package com.divisas.main.Repository;
-import com.divisas.main.Clases.Transaccion;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.divisas.main.Class.Transaccion;
 
 public interface TransaccionRepository extends JpaRepository<Transaccion,Long> {
     
